@@ -18,6 +18,10 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('libs/sbadmin/css/sb-admin-2.min.css')}}" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{asset('libs/sbadmin/css/sb-admin-2.min.css')}}" rel="stylesheet">
+
+    @stack('styles')
+
 </head>
 
 <body id="page-top">
@@ -25,81 +29,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fa-solid fa-hospital"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Suspensión<sup>App</sup></div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Configuración
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Administración</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="buttons.html">
-                            <i class="fas fa-users fa-fw"></i> Usuario
-                        </a>
-                        <a class="collapse-item" href="cards.html">
-                            <i class="fas fa-id-card fa-fw"></i> Roles
-                        </a>
-                        <a class="collapse-item" href="cards.html">
-                            <i class="fas fa-hand-paper fa-fw"></i> Permisos
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-user-tie fa-fw"></i>
-                    <span>Personas</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-        </ul>
-        <!-- End of Sidebar -->
+        @include('layouts.partials.sidebar')
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -146,6 +76,7 @@
                 </nav>
                 <!-- End of Topbar -->
 
+<<<<<<< Updated upstream
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -256,6 +187,13 @@
                 </div>
             </footer>
             <!-- End of Footer -->
+=======
+            @include('layouts.partials.content')
+            </div>
+            <!-- End of Main Content -->
+
+            @include('layouts.partials.footer')
+>>>>>>> Stashed changes
 
         </div>
         <!-- End of Content Wrapper -->
@@ -301,6 +239,12 @@
     <!-- Page level custom scripts -->
     <!--<script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>-->
+
+    @stack('scripts')
+
+    <script src="{{asset('js/main.js')}}"></script>
+
+    @include('sweetalert::alert')
 
 </body>
 
