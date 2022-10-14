@@ -11,23 +11,10 @@
             </div>
             <div class="modal-body">
                 <form action="" role="form" method="POST" id="editEspecialidadFrm">
-                    @method('PUT')
                     {{csrf_field()}}
-                    <div class="row">
-                        <div class="col-lg-6 form-group">
-                            <div>
-                                <label for="name" class="form-fields">Id_especialidad</label>
-                                <label class="mandatory-field">*</label>
-                                <input type="text"
-                                       class="form-control {{$errors->has('Id_especialidad') ? 'is-invalid' : ''}}"
-                                       name="name" id="name" value="{{old('Id_especialidad')}}" placeholder="-">
-                                @if ($errors->has('Id_especialidad'))
-                                    <span class="text-danger">{{ $errors->first('Id_especialidad') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
+                    @method("PUT")
+                    
+                    
                         <div class="col-lg-6 form-group">
                             <div>
                                 <label for="name" class="form-fields">Nombre</label>
@@ -40,9 +27,9 @@
                                 @endif
                             </div>
                         </div>
-                    </div>
                     
-                    <div class="row">
+                    
+                   
                         <div class="col-lg-12 form-group">
                             <div>
                                 <label for="name" class="form-fields">Descripción</label>
@@ -53,7 +40,7 @@
                                 @endif
                             </div>
                         </div>
-                    </div>
+                    
 
                     <div class="buttons-form-submit d-flex justify-content-end">
                         <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal">Cerrar</button>

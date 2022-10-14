@@ -8,7 +8,7 @@
             <span aria-hidden="true"></span>
         </button>
       </div>
-      <form action="{{route('especialidades.store')}}" role="form" method="POST" id="createEspecialidadFrm">
+      <form action="{{ route('especialidades.store')}}" role="form" method="POST" id="createEspecialidadFrm">
         <div class="modal-body">
           @csrf
           <div class="form-group">
@@ -17,21 +17,21 @@
             <input type="text" class="form-control {{$errors->has('name') ?  'is-invalid' : ''}}"
               name="Nombre_especialidad" id="name" placeholder="-">
               @if($errors->has('name'))
-                  <span class="text-danger">{{$errors->first('name')}}</span>
+                <span class="text-danger">{{$errors->first('name')}}</span>
               @endif
           </div>    
           <div class="form-group">
             <label for="name" class="form-fields">Descripción</label>
             <textarea class="form-control" name="Descripcion" id="descripcion" rows="5">
-                {{old('descripcion')}}
+              {{old('descripcion')}}
             </textarea>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           <button type="submit" href="#" class="btn btn-primary">
-              Guardar
-              <i class="fas fa-spinner fa-spin d-none"></i>
+            Guardar
+            <i class="fas fa-spinner fa-spin d-none"></i>
           </button>
         </div>
       </form>

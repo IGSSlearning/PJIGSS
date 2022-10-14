@@ -17,7 +17,7 @@ class EspecialidadFactory extends Factory
     public function definition()
     {
         return [
-        #    'Id_especialidad' => "Especialidad {$this->faker->Id_especialidad}",
+            'Id_especialidad' => "Especialidad {$this->faker->Id_especialidad}",
             'Nombre_especialidad' => "Especialidad {$this->faker->Nombre_especialidad}",
             'Descripcion' => "Especialidad {$this->faker->Descripcion}",
         ];
