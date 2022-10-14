@@ -5,40 +5,38 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EspecialidadRequest;
 use App\Models\Especialidad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EspecialidadController extends Controller
 {
     
     public function index()
     {
-        $especialidades = Especialidad::get();
+        $especialidades = Especialidad::all();
 
-        return view('especialidades.index', compact(varne: 'especialidades'));
+        #return view('especialidades.index', compact(varne: 'especialidad'));
+        return view('especialidades.index', compact('especialidades'));
+        #Route::get('/especialidades.index', 'EspecialidadController@index')->name('especialidades.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(EspecialidadRequest $request)
+    public function store(Request $request)
     {
+        //validacion de los datos obtenidos de la vista
+        Validator::make($request->all(),[
+            'Nombre_especialidad' => 'required|max:100',
+            'Descripcion' => 'required|max:2'
+        ])->validate();
+        
         Especialidad::create($request->all());
 
         alert()->success('Especialidad guardado correctamente');
 
-        return redirect()->route(route:'especialidades.index');
+        return redirect()->route('especialidades.index');
     }
 
     /**
@@ -72,7 +70,12 @@ class EspecialidadController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $especialidad->fill($request->all());
+        $especialidad->save();
+
+        alert()->success('Especialidad actualizado correctamente');
+
+        return redirect()->route('especialidades.index');
     }
 
     /**

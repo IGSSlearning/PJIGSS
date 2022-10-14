@@ -9,8 +9,13 @@ class Especialidad extends Model
 {
     use HasFactory;
 
-    protected $fillabla = [
-        'Id_especialidad',
+
+    protected $table = 'especialidad';
+    protected $primaryKey = 'Id_especialidad';
+    public $timestamps = false;
+
+
+    protected $fillable = [
         'Nombre_especialidad',
         'Descripcion',
     ];

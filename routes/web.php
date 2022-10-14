@@ -8,6 +8,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [HomeController::class, 'index'])->name(name:'home');
-Route::resource('/especialidades', controller: EspecialidadController::class);
+Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
+Route::resource('/especialidades', EspecialidadController::class);
 

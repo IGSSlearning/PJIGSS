@@ -1,23 +1,20 @@
 @extends('layouts.admin')
+
 @section('titulo')
+<span>Especialidades</span>
 
-   <span>Especialidades</span>
-
-   <a href="" class="btn btn-primary btn-circle" data-toggle="modal" data-target="#acreateMdl">
+<a href="" class="btn btn-primary btn-circle" data-toggle="modal" data-target="#createMdl">
     <i class="fas fa-plus"></i>
-   </a>
-
+</a>
 @endsection
-
 @section('contenido')
 
     @include('especialidades.modals.create')
-    @include('especialidades.modals.update')
-    @include('especialidades.modals.delete')
+
 
     <div class="card">
-        <div class="class card-body">
-            <table id="dt-especialidades" class="table table-striped table-bordered dts">
+        <div class="card-body">
+            <table id="dt-especialidad" class="table table-striped table-bordered dts">
                 <thead>
                 <tr>
                     <th class="text-center">Id</th>
@@ -27,41 +24,43 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach($especialidades as $especialidad)
-                        <tr class="text-center">
-                            <td>{{$especialidad->Id_especialidad}}</td>
-                            <td>{{$especialidad->Nombre_especialidad}}</td>
-                            <td>{{$especialidad->Descripcion}}</td>
-                            <td>
-                                <a href="" class="edit-form-data" data-toggle="modal" data-target="editMdl">
-                                    <i class="far fa-edit"></i>
-                                </a>
+                @foreach($especialidades as $especialidad)
+                    <tr class="text-center">
+                        <td>{{$especialidad->Id_especialidad}}</td>
+                        <td>{{$especialidad->Nombre_especialidad}}</td>
+                        <td>{{$especialidad->Descripcion}}</td>
+                        <td>
+                            <a href="" class="edit-form-data" data-toggle="modal" data-target="#editMdl" onclick="editEspecialidad({{$especialidad}})">
+                                <i class="far fa-edit"></i>
+                            </a>
 
-                                <a href="" class="detele-form-data" data-toggle="modal" data-target="editMdl">
-                                    <i class="far fa-trash-alt"></i>
-                                </a>
+                            <a href="" class="detele-form-data" data-toggle="modal" data-target="#deleteMdl">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
 
-                            </td>
-                        </tr>
-                    @endforeach
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-@endselection
 
-
-@push('styles')
-
-   <link rel="stylesheet" href="{{asset('libs/datatables/dataTables.bootstrap4.min.css')}}">
-@endpush
+@endsection
 
 @push('scripts')
+    <script>
+        function editEspecialidad(especialidad){
+            $("#editEspecialidadFrm").attr('action',`/especialidad/${especialidad.id}`);
 
-   <script src="{{asset('/libs/datatables/jquery.dataTables.min.js')}}"></script>
-   <script src="{{asset('/libs/datatables/dataTables.bootstrap4.min.js')}}"></script>
+            $("#editEspecialidadtFrm #Id").val(especialidad.Id_especialidad);
+            $("#editEspecialidadFrm #Nombre").val(especialidad.Nombre_especialidad);
+            $("#editEspecialidadFrm #Descripcion").val(especialidad.Descripcion);
+            
+        }
+    </script>
 
-    @if(!$errors->idEmpty())
+    @if(!$errors->isEmpty())
         @if($errors->has('post'))
             <script>
                 $(function () {
@@ -71,9 +70,9 @@
         @else
             <script>
                 $(function () {
-                    $(#editMdl).modal('show');
+                    $('#editMdl').modal('show');
                 });
             </script>
         @endif
     @endif
-@endpush
+@endpush 
