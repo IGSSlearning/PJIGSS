@@ -35,13 +35,16 @@
                             onclick="editEspecialidad({{$especialidad}})">
                                 <i class="far fa-edit"></i>
                             </a>
-                            <form action="{{ url('especialidades/'.$especialidad)}} " method ="post">
+                            <form action="{{ route('especialidades.destroy',$especialidad->Id_especialidad)}} " method ="post">
                                 @csrf
                                     {{ method_field('DELETE') }}
-                                <a href="" class="detele-form-data" data-toggle="modal" data-target="#deleteMdl">
+                                
+                                <input type="submit" onclick="return confirm('¿Desea borrar el registro?')" value="Borrar">
+                                <!--<a href="" class="detele-form-data" data-toggle="modal" data-target="#deleteMdl">
                                     <i class="far fa-trash-alt"></i>
-                                    <input type="submit" onclick="return confirm('¿Desea borrar el registro?')" value="Borrar">
-                                </a>
+                                    
+                                </a>-->
+                                <img class="detele-form-data" data-toggle="modal" data-target="#deleteMdl">
                             </form>
                             
 
