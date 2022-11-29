@@ -73,9 +73,8 @@ class OficioController extends Controller
         $oficio->save();
         $bitacora_oficio -> save();
 
-        alert()->success('Oficio creado');
 
-        return redirect()->route('ofisusp.index');
+        return redirect()-> route('agregarsuspenciones.show',$oficio->id_oficio);
     }
 
     public function show($id)
