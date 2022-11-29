@@ -1,79 +1,53 @@
 @extends('layouts.admin')
+
 @section('titulo')
-
-   <span>Especialidades</span>
-
-   <a href="" class="btn btn-primary btn-circle" data-toggle="modal" data-target="#acreateMdl">
-    <i class="fas fa-plus"></i>
-   </a>
-
+<span>Especialidades</span>
 @endsection
-
 @section('contenido')
-
-    @include('especialidades.modals.create')
-    @include('especialidades.modals.update')
-    @include('especialidades.modals.delete')
-
-    <div class="card">
-        <div class="class card-body">
-            <table id="dt-especialidades" class="table table-striped table-bordered dts">
-                <thead>
-                <tr>
-                    <th class="text-center">Id</th>
-                    <th class="text-center">Nombre</th>
-                    <th class="text-center">Descripción</th>
-                    <th class="text-center">Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @foreach($especialidades as $especialidad)
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-xs-12">
+        <div class="card mb-4">
+            <div class="card-header">
+                <div class="row justify-content-between">
+                    <h4>Listado de especialidades</h4>
+                    @can('especialidad-create')
+                        <a type="button" class="btn btn-primary" href="{{route('especialidades.create')}}"><i class="fas fa-plus"></i>Nuevo</a>
+                    @endcan
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="dt-especialidades" class="table table-striped table-bordered dts">
+                    <thead>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th> Opciones </th>
+                    </thead>
+                    <tbody>
+                        @foreach($especialidades as $item)
                         <tr class="text-center">
-                            <td>{{$especialidad->Id_especialidad}}</td>
-                            <td>{{$especialidad->Nombre_especialidad}}</td>
-                            <td>{{$especialidad->Descripcion}}</td>
-                            <td>
-                                <a href="" class="edit-form-data" data-toggle="modal" data-target="editMdl">
-                                    <i class="far fa-edit"></i>
-                                </a>
-
-                                <a href="" class="detele-form-data" data-toggle="modal" data-target="editMdl">
-                                    <i class="far fa-trash-alt"></i>
-                                </a>
-
+                            <td>{{ $item->id_especialidad }}</td>
+                            <td>{{ $item->nombre_especialidad }}</td>
+                            <td>{{ $item->descripcion }}</td>
+                            <td colspan="2 flex justify-center">
+                                @can('especialidad-edit')
+                                    <a href="{{ route ('especialidades.edit', $item->id_especialidad) }}"
+                                    class="btn btn-warning" ><i class="fas fa-edit"></i></a>
+                                @endcan
+                                @can('especialidad-delete')
+                                    <form action="{{ route('especialidades.destroy',$item->id_especialidad)}}" method="post" class="d-inline">
+                                    @csrf
+                                    {{method_field('DELETE')}}
+                                    <button class="btn btn-danger" type="submit" class="d-inline"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                        @endforeach                
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-@endselection
-
-
-@push('styles')
-
-   <link rel="stylesheet" href="{{asset('libs/datatables/dataTables.bootstrap4.min.css')}}">
-@endpush
-
-@push('scripts')
-
-   <script src="{{asset('/libs/datatables/jquery.dataTables.min.js')}}"></script>
-   <script src="{{asset('/libs/datatables/dataTables.bootstrap4.min.js')}}"></script>
-
-    @if(!$errors->idEmpty())
-        @if($errors->has('post'))
-            <script>
-                $(function () {
-                    $('#createMdl').modal('show');
-                });
-            </script>
-        @else
-            <script>
-                $(function () {
-                    $(#editMdl).modal('show');
-                });
-            </script>
-        @endif
-    @endif
-@endpush
+</div>
+@endsection

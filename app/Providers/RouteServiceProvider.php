@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
+
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -17,6 +18,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+
+    protected $namespace = 'App\Http\Controllers';
+
     public const HOME = '/home';
 
     /**
@@ -31,9 +35,11 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
+                
                 ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
+                ->namespace($this->namespace) // this line
                 ->group(base_path('routes/web.php'));
         });
     }
@@ -49,4 +55,6 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
     }
+
+    
 }

@@ -24,17 +24,16 @@ class EspecialidadRequest extends FormRequest
     public function rules()
     {
         return [
-            'Id_especilidad' => ['required', 'integer', 'unique:especialidades,Id_especialidad', 'max:255'],
-            'Nombre_especialidad' => ['required', 'string', 'unique:especialidades,Nombre_especialidad', 'max:255'] ,
-            'Descripcion' => ['required', 'string', 'unique:especialidades,descripcion', 'max:255']
+            'Nombre_especialidad' => ['required', 'string', 'unique:especialidades,name'] ,
+            'Descripcion' => ['required', 'string']
         ];
     }
 
 
     public function withValidator($validator)
     {
-        $validator->after(function($validator){
-            if($validator->errors()->count()){
+        $validator->after(function($validator) {
+            if($validator->errors()->count()) {
                 if(!in_array($this->method(), ['PUT', 'PATCH'])) {
                     $validator->errors()->add('post', true);
                 }
